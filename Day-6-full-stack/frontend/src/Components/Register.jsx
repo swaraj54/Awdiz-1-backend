@@ -23,6 +23,8 @@ const Register = () => {
             if (response.data.status == 200) {
                 alert(response.data.message)
                 router('/login');
+            } else {
+                alert("Error..")
             }
         } else {
             alert("Please fill all the fields.")
