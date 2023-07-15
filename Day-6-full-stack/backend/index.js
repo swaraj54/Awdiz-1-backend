@@ -21,7 +21,7 @@ app.post('/login', login)
 
 //product routes
 app.post('/add-product', addProduct)
-app.get('/all-product', allProducts)
+app.get('/all-products', allProducts)
 
 mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log("Conncted to DB.")
