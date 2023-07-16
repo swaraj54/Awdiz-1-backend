@@ -3,15 +3,19 @@ import mongoose, { Schema } from "mongoose";
 const userSchema = new Schema({
     name: {
         type: String,
-        requiired: true
+        required: true
     },
     email: {
         type: String,
-        requiired: true
+        required: true
+    },
+    role: {
+        type: String,
+        required: true,
     },
     password: {
         type: String,
-        requiired: true
+        required: true
     },
 })
 

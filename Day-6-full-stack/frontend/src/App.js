@@ -6,10 +6,12 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import AddProduct from './Components/AddProduct';
 import AllProducts from './Components/AllProducts';
+import Navbar from './Components/Navbar';
 
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Routes>
         <Route exact path='/' element={<Homepage />} />
         <Route exact path='/login' element={<Login />} />

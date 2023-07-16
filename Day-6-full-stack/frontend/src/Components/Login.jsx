@@ -17,7 +17,11 @@ const Login = () => {
         email: userData.email,
         password: userData.password
       })
+      console.log(response.data, "response")
       if (response.data.status == 200) {
+        console.log(response.data.data);
+
+        localStorage.setItem("accessToken", JSON.stringify(response.data.data));
         alert(response.data.message)
         router('/');
         setUserData({ email: "", password: "" })
