@@ -32,9 +32,32 @@ export const login = async (req, res) => {
         const token = jwt.sign(payload, process.env.JWT_SECRET);
         // console.log(token, "- token")
         if (user) {
-            return res.json({ status: 200, message: "Login successfull.", data: token })
+            return res.json({ status: 200, message: "Login successfull.", data: token, user })
         }
         return res.send("Credentials wrong..")
+    } catch (error) {
+        return res.send(error)
+    }
+}
+
+
+export const getCurrentUser = async (req, res) => {
+    try {
+        const { token } = req.body;
+        if (!token) return res.send("Token is required!")
+
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+
+        // console.log(decodedToken, "decoeded tokem")
+
+        const userId = decodedToken.id;
+
+        const user = await User.findById(userId);
+
+        if (user) {
+            res.status(200).json({ data: user, status: "Sucess" })
+        }
+
     } catch (error) {
         return res.send(error)
     }

@@ -3,7 +3,7 @@ const app = express();
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
-import { register, login } from './controllers/User.controllers.js';
+import { register, login, getCurrentUser } from './controllers/User.controllers.js';
 import { addProduct, allProducts } from './controllers/Product.controllers.js';
 import mongoose from 'mongoose';
 dotenv.config();
@@ -14,6 +14,9 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Working...")
 })
+
+// check user
+app.post("/get-current-user", getCurrentUser)
 
 //user routes
 app.post('/register', register)
