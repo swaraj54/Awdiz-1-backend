@@ -5,11 +5,13 @@ const Homepage = () => {
 
     const [user, setUser] = useState({});
     const { state, login, logout } = useContext(AuthContext);
-    console.log(user, "- user")
+    console.log(user, "- user updated state")
 
     useEffect(() => {
         if (state.user) {
             setUser(state?.user)
+        } else {
+            setUser({});
         }
     }, [state])
     return (

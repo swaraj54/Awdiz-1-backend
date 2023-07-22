@@ -1,5 +1,6 @@
 import User from './../modal/User.schema.js';
 import jwt from 'jsonwebtoken';
+import Product from './../modal/Product.schema.js';
 
 export const register = async (req, res) => {
     try {
@@ -52,12 +53,24 @@ export const getCurrentUser = async (req, res) => {
 
         const userId = decodedToken.id;
 
-        const user = await User.findById(userId);
+        const user = await User.findById(userId).select("-password");;
 
         if (user) {
             res.status(200).json({ data: user, status: "Sucess" })
         }
 
+    } catch (error) {
+        return res.send(error)
+    }
+}
+
+
+export const getSellProducts = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        if (!userId) return res.send("UserId is required!");
+        const allProduct = await Product.find({ userId })
+        return res.send(allProduct)
     } catch (error) {
         return res.send(error)
     }

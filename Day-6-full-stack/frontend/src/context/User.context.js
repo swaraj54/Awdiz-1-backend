@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
         })
     }
     const logout = () => {
+        localStorage.removeItem("accessToken")
         dispatch({
             type: "logout"
         })

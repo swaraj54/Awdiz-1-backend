@@ -1,8 +1,13 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/User.context'
 
 const AddProduct = () => {
+
+  const [user, setUser] = useState({});
+  // console.log(user, " User")
+  const { state } = useContext(AuthContext)
   const [productData, setProductData] = useState({ name: "", image: "", price: "" })
   const router = useNavigate()
   const handleChange = (event) => {
@@ -15,7 +20,8 @@ const AddProduct = () => {
       const response = await axios.post("http://localhost:8000/add-product", {
         name: productData.name,
         image: productData.image,
-        price: productData.price
+        price: productData.price,
+        userId: user?._id
       });
       if (response.data.status == 200) {
         setProductData({ name: "", image: "", price: "" })
@@ -28,6 +34,24 @@ const AddProduct = () => {
       alert("Please fill the all fields..")
     }
   }
+
+  useEffect(() => {
+    if (state.user) {
+      setUser(state?.user)
+    } else {
+      setUser({});
+    }
+  }, [state])
+
+
+  useEffect(() => {
+    if (state?.user) {
+      if (state?.user?.role != "Seller") {
+        alert("You are not seller to add products.")
+        router('/')
+      }
+    }
+  }, [state])
 
   return (
     <div>

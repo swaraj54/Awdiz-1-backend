@@ -7,6 +7,7 @@ import Register from './Components/Register';
 import AddProduct from './Components/AddProduct';
 import AllProducts from './Components/AllProducts';
 import Navbar from './Components/Navbar';
+import ProductsHandler from './Components/Products/ProductsHandler';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path='/register' element={<Register />} />
         <Route exact path='/add-product' element={<AddProduct />} />
         <Route exact path='/all-products' element={<AllProducts />} />
+        <Route exact path='/productshandler' element={<ProductsHandler />} />
       </Routes>
     </div>
   );

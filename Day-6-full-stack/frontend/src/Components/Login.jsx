@@ -9,7 +9,7 @@ const Login = () => {
   const router = useNavigate();
 
   const { state, login, logout } = useContext(AuthContext);
-  console.log(state,"- state in login")
+  console.log(state, "- state in login")
   const handleChange = (event) => {
     setUserData({ ...userData, [event.target.name]: event.target.value })
   }
@@ -47,6 +47,7 @@ const Login = () => {
         <input value={userData.password} onChange={handleChange} type='password' name="password" /><br />
         <input type='submit' value="Login" /><br />
       </form>
+      <button onClick={() => router('/register')} >Register</button>
     </div>
   )
 }
