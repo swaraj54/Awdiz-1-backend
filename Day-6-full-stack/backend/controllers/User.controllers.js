@@ -28,7 +28,7 @@ export const login = async (req, res) => {
 
         // console.log("Before token", user)
 
-        const payload = { id: user._id, email: user.email, role: user.role }
+        const payload = { id: user._id }
 
         const token = jwt.sign(payload, process.env.JWT_SECRET);
         // console.log(token, "- token")
@@ -71,6 +71,38 @@ export const getSellProducts = async (req, res) => {
         if (!userId) return res.send("UserId is required!");
         const allProduct = await Product.find({ userId })
         return res.send(allProduct)
+    } catch (error) {
+        return res.send(error)
+    }
+}
+
+export const getCurrentUserWithPass = async (req, res) => {
+    try {
+        const { userId } = req.body;
+        console.log(userId, "userId")
+        if (!userId) return res.send("User id is required!")
+
+        const user = await User.findById(userId);
+
+        if (user) {
+            res.status(200).json({ data: user, status: "Sucess" })
+        }
+
+    } catch (error) {
+        return res.send(error)
+    }
+}
+
+
+export const updateProfile = async (req, res) => {
+    try {
+        const { name, email, password, _id } = req.body.userData;
+        if (!name) return res.send("name is required");
+        if (!email) return res.send("email is required");
+        if (!password) return res.send("password is required");
+
+        const result = await User.findByIdAndUpdate(_id, { name, email, password }, { returnDocument: 'after' })
+        res.send(result);
     } catch (error) {
         return res.send(error)
     }

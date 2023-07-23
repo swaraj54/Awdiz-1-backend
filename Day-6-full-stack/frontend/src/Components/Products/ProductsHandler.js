@@ -4,10 +4,11 @@ import axios from 'axios';
 
 const ProductsHandler = () => {
     const { state } = useContext(AuthContext);
-
+    const [updatedData, setUpdatedData] = useState({ name: "", price: "", image: "" });
+    console.log(updatedData, "updatedData")
     const [user, setUser] = useState({});
     const [userAddedProduct, setUserAddedProduct] = useState([]);
-    console.log(userAddedProduct, "userAddedProduct from backend")
+    // console.log(userAddedProduct, "userAddedProduct from backend")
 
     useEffect(() => {
         if (state.user) {
@@ -29,6 +30,14 @@ const ProductsHandler = () => {
         }
     }, [user])
 
+    const handleChange = (event) => {
+        setUpdatedData({ ...updatedData, [event.target.name]: event.target.value })
+    }
+
+    const updateProduct = async (event, id) => {
+        event.preventDefault();
+        alert(id)
+    }
 
     return (
         <div>
@@ -37,17 +46,17 @@ const ProductsHandler = () => {
                 {userAddedProduct && userAddedProduct.map((pro) => (
                     <div style={{ width: "20%", height: "400px", border: "2px solid black", paddingBottom: "30px" }}>
                         <img style={{ width: "100%", height: "75%" }} src={pro.image} />
-                        <label>Image</label>
-                        <input value={pro.image} /><br />
-                        <label>Name </label>
-                        <input value={pro.name} /><br />
-                        <label>Price </label>
-                        <input value={pro.price} /><br />
-                        <button>Update</button>
-                    </div>
+                        <form onSubmit={(event) => updateProduct(event, pro._id)}>
+                            <label>Name </label>
+                            <h2> {pro.name} </h2><br />
+                            <label>Price </label>
+                            <h2> {pro.price}  </h2><br />
+                            <button type='submit'>Update</button>
+                        </form>
+                    </div >
                 ))}
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

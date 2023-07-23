@@ -3,7 +3,7 @@ const app = express();
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
-import { register, login, getCurrentUser, getSellProducts } from './controllers/User.controllers.js';
+import { register, login, getCurrentUser, getSellProducts, getCurrentUserWithPass, updateProfile } from './controllers/User.controllers.js';
 import { addProduct, allProducts } from './controllers/Product.controllers.js';
 import mongoose from 'mongoose';
 dotenv.config();
@@ -17,11 +17,13 @@ app.get("/", (req, res) => {
 
 // check user
 app.post("/get-current-user", getCurrentUser)
+app.post("/get-current-user-with-pass", getCurrentUserWithPass)
 
 //user routes
 app.post('/register', register)
 app.post('/login', login)
 app.post("/get-sell-products", getSellProducts)
+app.post("/update-profile", updateProfile )
 
 //product routes
 app.post('/add-product', addProduct)

@@ -8,6 +8,7 @@ import AddProduct from './Components/AddProduct';
 import AllProducts from './Components/AllProducts';
 import Navbar from './Components/Navbar';
 import ProductsHandler from './Components/Products/ProductsHandler';
+import Profile from './Components/Profile';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/add-product' element={<AddProduct />} />
         <Route exact path='/all-products' element={<AllProducts />} />
         <Route exact path='/productshandler' element={<ProductsHandler />} />
+        <Route exact path='/profile' element={<Profile />} />
       </Routes>
     </div>
   );

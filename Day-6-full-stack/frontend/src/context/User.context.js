@@ -22,7 +22,9 @@ const AuthProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const login = (userData) => {
         console.log(userData, "- userData after refersh")
-        localStorage.setItem("accessToken", JSON.stringify(userData.token));
+        if (userData.token) {
+            localStorage.setItem("accessToken", JSON.stringify(userData.token));
+        }
         dispatch({
             type: "login",
             payload: userData.payload

@@ -31,11 +31,11 @@ const Navbar = () => {
                     <h4 onClick={() => router('/productshandler')} style={{ cursor: "pointer", border: '1px solid black' }}>Product Handler - seller, admin</h4>}
                 <h4 onClick={() => router('/all-products')} style={{ cursor: "pointer", border: '1px solid black' }}>All product - everyone</h4>
 
-                {(role == "Seller" || role == "Admin") && <h4 onClick={()=> router("/add-product")}>Add Product</h4>}
+                {(role == "Seller" || role == "Admin") && <h4 onClick={() => router("/add-product")}>Add Product</h4>}
                 {role == "Buyer" && <h4 style={{ cursor: "pointer", border: '1px solid black' }}>Cart only buyer</h4>}
                 {user?.name ?
                     <>
-                        <h4 style={{ cursor: "pointer", border: '1px solid black' }}>{user.name}</h4>
+                        <h4 onClick={() => router('/profile')} style={{ cursor: "pointer", border: '1px solid black' }}>{user.name}</h4>
                         <h4 style={{ cursor: "pointer", border: '1px solid black' }} onClick={logout}>Logout</h4>
                     </> :
                     <h4 onClick={() => router('/login')}>Login</h4>
